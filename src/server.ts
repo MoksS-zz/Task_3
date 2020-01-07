@@ -23,7 +23,8 @@ let conf: ExampleConfiguration | undefined = undefined;
 conn.onInitialize((params: InitializeParams) => {
     return {
         capabilities: {
-            textDocumentSync: 'always'
+          textDocumentSync: docs.syncKind,
+          resolveProvider: true
         }
     };
 });
@@ -79,7 +80,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
             ? [
                   {
                       key: RuleKeys.UppercaseNamesIsForbidden,
-                      loc: property.key.loc
+                      loc: property.loc
                   }
               ]
             : [];
