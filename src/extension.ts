@@ -51,6 +51,7 @@ const getPreviewKey = (doc: vscode.TextDocument): string => doc.uri.path;
 
 const getMediaPath = (context: vscode.ExtensionContext) => vscode.Uri
     .file(context.extensionPath)
+    .with({ scheme: "resource"})
     .toString() + '/';
 
 const initPreviewPanel = (document: vscode.TextDocument, context: vscode.ExtensionContext) => {
