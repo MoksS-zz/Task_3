@@ -85,39 +85,57 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
               ]
             : [];
 
-    const diagnostics: Diagnostic[] = makeLint(
-        json,
-        validateProperty,
-        validateObject
-    ).reduce(
-        (
-            list: Diagnostic[],
-            problem: LinterProblem<RuleKeys>
-        ): Diagnostic[] => {
-            const severity = GetSeverity(problem.key);
+    let diagnostics = makeLint(json);
+    // reduce(
+    //     (
+    //         list: Diagnostic[],
+    //         problem: LinterProblem<RuleKeys>
+    //     ): Diagnostic[] => {
+    //         const severity = GetSeverity(problem.key);
 
-            if (severity) {
-                const message = GetMessage(problem.key);
+    //         if (severity) {
+    //             const message = GetMessage(problem.key);
 
-                let diagnostic: Diagnostic = {
-                    range: {
-                        start: textDocument.positionAt(
-                            problem.loc.start.offset
-                        ),
-                        end: textDocument.positionAt(problem.loc.end.offset)
-                    },
-                    severity,
-                    message,
-                    source
-                };
+    //             let diagnostic: Diagnostic = {
+    //                 range: {
+    //                     start: textDocument.positionAt(
+    //                         problem.loc.start.offset
+    //                     ),
+    //                     end: textDocument.positionAt(problem.loc.end.offset)
+    //                 },
+    //                 severity,
+    //                 message,
+    //                 source
+    //             };
 
-                list.push(diagnostic);
-            }
+    //             list.push(diagnostic);
+    //         }
 
-            return list;
-        },
-        []
-    );
+    //         return list;
+    //     },
+    //     []
+    // );
+    // [
+    //   {
+    //     range: { start: [Object], end: [Object] },
+    //     severity: 2,
+    //     message: "Field named 'block' is required!",
+    //     source: 'test.json'
+    //   },
+    //   {
+    //     range: { start: [Object], end: [Object] },
+    //     severity: 2,
+    //     message: "Field named 'block' is required!",
+    //     source: 'test.json'
+    //   },
+    //   {
+    //     range: { start: [Object], end: [Object] },
+    //     severity: 2,
+    //     message: "Field named 'block' is required!",
+    //     source: 'test.json'
+    //   }
+    // ]
+    
 
     if (diagnostics.length) {
         conn.sendDiagnostics({ uri: textDocument.uri, diagnostics });

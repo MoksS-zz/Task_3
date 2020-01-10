@@ -1,23 +1,30 @@
 {
-  "block": "page",
+  "block": "grid",
+  "mods": {
+      "m-columns": "10"
+  },
   "content": [
-      { "block":"header", "content":"test"},
       {
-          "block":"body",
+          "block": "grid",
+          "elem": "fraction",
+          "elemMods": {
+              "m-col": "2"
+          },
           "content": [
               {
-                  "BLOCK": "menu",
-                  "content" : [
-                      { "content": "item 1" },
-                      { "content": "item 2" },
-                      { "content": "item 3" },
-                      { "content": "item 2123" }
-                  ] 
-              },
+                  "block": "payment"
+              }
+          ]
+      },
+      {
+          "block": "grid",
+          "elem": "fraction",
+          "elemMods": {
+              "m-col": "8"
+          },
+          "content": [
               {
-                "block": "content",
-                "DATA": 124,
-                "content": ""
+                  "block": "offer"
               }
           ]
       }
