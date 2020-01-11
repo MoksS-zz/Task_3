@@ -58,7 +58,6 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
   );
 
 
-  console.log(diagnostics);
   if (diagnostics.length) {
     conn.sendDiagnostics({ uri: textDocument.uri, diagnostics });
   }
