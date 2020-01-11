@@ -44,7 +44,7 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
           ),
           end: textDocument.positionAt(problem.loc.end.offset)
         },
-        severity: DiagnosticSeverity.Warning,
+        severity: DiagnosticSeverity.Error,
         message: problem.error,
         source
       };

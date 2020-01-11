@@ -312,15 +312,15 @@ class Warning {
     this.text = {
       code: "WARNING.TEXT_SIZES_SHOULD_BE_EQUAL",
       mods: { size: obj.size || "none" },
-      error: "Тексты в блоке warning должны быть одного размера",
-      pass: true
+      error: "Тексты в блоке warning должны быть одного размера"
     };
 
     this.button = {
       code: "WARNING.INVALID_BUTTON_SIZE",
       error: "Размер кнопки блока warning должен быть на 1 шаг больше текста",
       mods: { size: obj.size || "none" },
-      path: []
+      pathText: [],
+      pathPlaceholder: []
     };
 
     this.placeholder = {
@@ -333,8 +333,6 @@ class Warning {
       code: "WARNING.INVALID_BUTTON_POSITION",
       error: "Блок button не может находиться перед блоком placeholder"
     };
-
-    this.path = obj.path;
   }
 
   static check(result, obj, rule, path) {
@@ -345,20 +343,20 @@ class Warning {
         rule.text.mods.size = obj.mods.size;
 
         if (rule.button.mods.size === "none") {
-          rule.button.path.forEach(e => {
+          rule.button.pathText.forEach(e => {
             if (e.size === sizeButton) return;
-            error(result, rule.button, e.path);
+            error(result, rule.button, `${e.path}/mods/size`);
           });
 
-          rule.button.path.length = 0;
+          rule.button.pathText.length = 0;
         }
 
         rule.button.mods.size = sizeButton;
         return;
       }
 
-      if (rule.text.mods.size !== obj.mods.size && rule.text.pass) {
-        error(result, rule.text, rule.path);
+      if (rule.text.mods.size !== obj.mods.size) {
+        error(result, rule.text, `${path}/mods/size`);
 
         rule.text.pass = false;
       }
@@ -366,32 +364,32 @@ class Warning {
     }
 
     if (obj.block === "button") {
-      rule.button.path.push(path);
+      rule.button.pathPlaceholder.push(path);
 
       if (!obj.mods) return;
 
       if (rule.button.mods.size === "none") {
-        rule.button.path.push({ size: obj.mods.size, path });
+        rule.button.pathText.push({ size: obj.mods.size, path });
         return;
       }
       if (rule.button.mods.size !== obj.mods.size) {
-        error(result, rule.button, path);
+        error(result, rule.button, `${path}/mods/size`);
       }
       return;
     }
 
     if (obj.block === "placeholder") {
-      if (rule.button.path.length > 0) {
-        rule.button.path.forEach(e => {
+      if (rule.button.pathPlaceholder.length > 0) {
+        rule.button.pathPlaceholder.forEach(e => {
           error(result, rule.sequence, e);
         });
-        rule.button.path.length = 0;
+        rule.button.pathPlaceholder.length = 0;
       }
 
       if (!obj.mods) return;
 
       if (!rule.placeholder.mods.size.includes(obj.mods.size)) {
-        error(result, rule.placeholder, path);
+        error(result, rule.placeholder, `${path}/mods/size`);
       }
     }
   }
@@ -423,13 +421,13 @@ class Header {
     switch (obj.mods.type) {
       case "h1":
         if (rule.h1.available) {
-          error(result, rule.h1, path);
+          error(result, rule.h1, `${path}/mods/type`);
         }
         rule.h1.available = true;
 
         if (rule.h2.path.length > 0) {
           rule.h2.path.forEach(e => {
-            error(result, rule.h2, e);
+            error(result, rule.h2, `${e}/mods/type`);
           });
           rule.h2.path.length = 0;
         }
@@ -440,7 +438,7 @@ class Header {
 
         if (rule.h3.path.length > 0) {
           rule.h3.path.forEach(e => {
-            error(result, rule.h3, e);
+            error(result, rule.h3, `${e}/mods/type`);
           });
           rule.h3.path.length = 0;
         }
