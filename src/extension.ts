@@ -54,7 +54,7 @@ const getMediaPath = (context: vscode.ExtensionContext) => vscode.Uri
     .with({ scheme: "resource"})
     .toString() + '/';
 
-const initPreviewPanel = (document: vscode.TextDocument, context: vscode.ExtensionContext) => {
+const initPreviewPanel = (document: vscode.TextDocument) => {
     const key = getPreviewKey(document);
     const fileName = basename(document.fileName);
 
@@ -68,46 +68,46 @@ const initPreviewPanel = (document: vscode.TextDocument, context: vscode.Extensi
     );
 
     PANELS[key] = panel;
-
     const e = panel.onDidDispose(() => 
     {
         delete PANELS[key];
         e.dispose();
     });
-
+   
     return panel;
 };
 
 const updateContent = (doc: vscode.TextDocument, context: vscode.ExtensionContext) => {
     const panel = PANELS[doc.uri.path];
-
     if (panel) {
         try {
             const json = doc.getText();
             const data = JSON.parse(json);
-            const html = template.apply(data);
+            const html = template.apply(data);   
+            
 
-            const cssPath = vscode.Uri.file(
-              join(context.extensionPath, 'preview', 'style.css')
+            // We need to add our style.css and script.js
+            const stylePath = vscode.Uri.file(
+                join(context.extensionPath, "preview", 'style.css')
             );
-            const jsPath = vscode.Uri.file(
-              join(context.extensionPath, 'preview', 'script.js')
+            const addStyle = panel.webview.asWebviewUri(stylePath);
+            
+            const scriptPath = vscode.Uri.file(
+                join(context.extensionPath, "preview", 'srcipt.js')
             );
-            // And get the special URI to use with the webview
-            const cssHref = panel.webview.asWebviewUri(cssPath);
-            const jsSrc = panel.webview.asWebviewUri(jsPath);
-
+            const addScript = panel.webview.asWebviewUri(scriptPath);
+        
             panel.webview.html = previewHtml 
-                .replace(/\{\{(.+?)\}\}/g, (str, key) => {
+                .replace(/\{\{(.+?)\}\}/g, (str, key,) => {
                     switch (key) {
                         case 'content':
                             return html;
                         case 'mediaPath':
                             return getMediaPath(context);
-                        case 'cssPath':
-                            return `${cssHref}`;
-                        case 'jsPath':
-                            return `${jsSrc}`;
+                        case 'stylePath':
+                            return `${addStyle}`;
+                        case 'scriptPath':
+                            return `${addScript}`;
                         default:
                             return str;
                     }
@@ -124,10 +124,9 @@ const openPreview = (context: vscode.ExtensionContext) => {
         const key = getPreviewKey(document);
 
         const panel = PANELS[key];
-
         if (panel) { panel.reveal(); }
         else {
-            const panel = initPreviewPanel(document, context);
+            const panel = initPreviewPanel(document);
             updateContent(document, context);
             context.subscriptions.push(panel);
         }

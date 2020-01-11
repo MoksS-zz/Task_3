@@ -1,20 +1,19 @@
 {
-  "block": "page",
-  "content": [
-      { "block":"header", "content":"test"},
-      {
-          "block":"body",
-          "content": [
-              {
-                  "BLOCK": "menu",
-                  "content" : [
-                      { "content": "item 1" },
-                      { "content": "item 2" },
-                      { "content": "item 3" },
-                      { "content": "item 2" }
-                  ] 
-              }
-          ]
-      }
-  ]
+    "block": "page",
+    "content": [
+        {"block": "header", "content": "test"},
+        {
+            "BLOCK": "body",
+            "content": [
+                {
+                    "block": "menu",
+                    "content": [
+                        {"block": "body","content": "item 1"},
+                        {"block": "body","content": "item 2"},
+                        {"content": "item 3"}
+                    ]
+                }
+            ]
+        }
+    ]
 }
