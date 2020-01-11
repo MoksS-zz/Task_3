@@ -57,10 +57,8 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
     []
   );
 
-
-  if (diagnostics.length) {
-    conn.sendDiagnostics({ uri: textDocument.uri, diagnostics });
-  }
+  conn.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+  
 }
 
 async function validateAll() {
