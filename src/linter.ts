@@ -40,7 +40,6 @@ export function makeLint<TProblemKey>(
     const errors: LinterProblem<TProblemKey>[] = [];
     const ast: JsonAST = parseJson(json);
     
-    console.log(JSON.stringify(ast, null, 2));
     if (ast) {
         walk(ast, 
             (property: jsonToAst.AstProperty) => errors.push(...validateProperty(property)), 
