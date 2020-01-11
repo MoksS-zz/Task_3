@@ -1,6 +1,6 @@
 export enum RuleKeys {
     UppercaseNamesIsForbidden = 'uppercaseNamesIsForbidden',
-    BlockNameIsRequired = 'blockNameIsRequired',
+    BlockNameIsRequired = 'blockNameIsRequired'
 }
 
 export enum Severity {

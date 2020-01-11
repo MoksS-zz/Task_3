@@ -291,6 +291,7 @@ const market = new Set(["commercial", "offer"]);
 const error = (result, obj, path) => {
   result.errors.push({
     key: obj.code,
+    error: obj.error,
     loc: {
       start: {
         column: result.pointers[path].value.column,

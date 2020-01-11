@@ -5,8 +5,6 @@ declare namespace JsonToAst {
       offset: number;
   }
 
-
-
   export interface AstLocation {
       start: AstPosition;
       end: AstPosition;
@@ -49,6 +47,7 @@ declare namespace JsonToAst {
 
 export interface LinterProblem<TKey> {
   key: TKey;
+  error: string;
   loc: JsonToAst.AstLocation;
 }
 

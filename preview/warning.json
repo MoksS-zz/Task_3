@@ -1,0 +1,29 @@
+{
+  "block": "warning",
+  "content": [
+      {
+          "block": "placeholder",
+          "mods": { "size": "xl" }
+      },
+      {
+          "elem": "content",
+          "content": [
+              {
+                  "block": "text",
+                  "mods": { "size": "m" }
+              },
+              {
+                  "block": "text",
+                  "mods": { "size": "s" }
+              },
+              { "block": "placeholder", "mods": { "size": "l" } },
+              { "block": "button", "mods": { "size": "l" } }
+          ]
+      },
+      {
+        "block": "placeholder",
+        "mods": { "size": "m" }
+      },
+      { "block": "button", "mods": { "size": "s" } }
+  ]
+}
