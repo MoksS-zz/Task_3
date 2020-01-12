@@ -6,9 +6,9 @@
             "block": "body",
             "content": [
                 {
-                    "block": "menu",
+                    "BLOCK": "menu",
                     "content": [
-                        {"block": "body","content": "item 1"},
+                        {"content": "item 1"},
                         {"block": "body","content": "item 2"},
                         {"block": "body", "content": "item 3"}
                     ]
