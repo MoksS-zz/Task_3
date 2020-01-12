@@ -66,7 +66,6 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
     try {
         const source = basename(textDocument.uri);
     
-        // Get json string insted of uri. We need json string
         const json = textDocument.getText();
 
         const validateObject = (

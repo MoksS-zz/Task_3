@@ -85,8 +85,6 @@ const updateContent = (doc: vscode.TextDocument, context: vscode.ExtensionContex
             const data = JSON.parse(json);
             const html = template.apply(data);   
             
-
-            // We need to add our style.css and script.js
             const stylePath = vscode.Uri.file(
                 join(context.extensionPath, "preview", 'style.css')
             );

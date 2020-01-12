@@ -3,14 +3,14 @@
     "content": [
         {"block": "header", "content": "test"},
         {
-            "BLOCK": "body",
+            "block": "body",
             "content": [
                 {
                     "block": "menu",
                     "content": [
                         {"block": "body","content": "item 1"},
                         {"block": "body","content": "item 2"},
-                        {"content": "item 3"}
+                        {"block": "body", "content": "item 3"}
                     ]
                 }
             ]
