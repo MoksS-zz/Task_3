@@ -337,8 +337,9 @@ class Warning {
 
   static check(result, obj, rule, path) {
     if (obj.block === "text") {
+      if (!obj.mods) return;
+      if (!obj.mods.size) return;
       if (rule.text.mods.size === "none") {
-        if (!obj.mods) return;
         const sizeButton = size[size.indexOf(obj.mods.size) + 1];
         rule.text.mods.size = obj.mods.size;
 
@@ -418,6 +419,7 @@ class Header {
 
   static check(result, obj, rule, path) {
     if (obj.block !== "text" || !obj.mods) return;
+    if (!obj.mods.type) return;
     switch (obj.mods.type) {
       case "h1":
         if (rule.h1.available) {
@@ -505,9 +507,11 @@ function reqcursion(result, obj, path = "", rule = {}) {
 
   if (rule.hasOwnProperty("warning")) {
     Warning.check(result, obj, rule.warning, path);
-  } else if (rule.hasOwnProperty("header")) {
+  } 
+  if (rule.hasOwnProperty("header")) {
     Header.check(result, obj, rule.header, path);
-  } else if (rule.hasOwnProperty("grid")) {
+  } 
+  if (rule.hasOwnProperty("grid")) {
     Grid.check(result, obj, rule.grid, path);
   }
 }

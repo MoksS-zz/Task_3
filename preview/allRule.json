@@ -1,0 +1,135 @@
+{
+  "block": "warning",
+  "content": [
+    {
+      "block": "placeholder",
+      "mods": {
+        "size": "xl"
+      }
+    },
+    {
+      "elem": "content",
+      "content": [
+        {
+          "block": "text",
+          "mods": {
+            "size": "m"
+          }
+        },
+        {
+          "block": "text",
+          "mods": {
+            "size": "s"
+          }
+        },
+        {
+          "block": "placeholder",
+          "mods": {
+            "size": "l"
+          }
+        },
+        {
+          "block": "button",
+          "mods": {
+            "size": "l"
+          }
+        },
+        {
+          "block": "page",
+          "content": [
+            {
+              "block": "text",
+              "mods": {
+                "type": "h3"
+              },
+              "content": "header"
+            },
+            {
+              "block": "page",
+              "elem": "section",
+              "content": [
+                {
+                  "block": "page",
+                  "elem": "content",
+                  "content": [
+                    {
+                      "block": "text",
+                      "mods": {
+                        "type": "h2"
+                      },
+                      "content": "header"
+                    },
+                    {
+                      "block": "container",
+                      "content": {
+                        "block": "text",
+                        "mods": {
+                          "type": "h1"
+                        },
+                        "content": "header"
+                      }
+                    },
+                    {
+                      "block": "container",
+                      "content": {
+                        "block": "text",
+                        "mods": {
+                          "type": "h1"
+                        },
+                        "content": "header"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "block": "placeholder",
+      "mods": {
+        "size": "m"
+      }
+    },
+    {
+      "block": "button",
+      "mods": {
+        "size": "s"
+      }
+    },
+    {
+      "block": "grid",
+      "mods": {
+        "m-columns": "10"
+      },
+      "content": [
+        {
+          "block": "grid",
+          "elem": "fraction",
+          "elemMods": {
+            "m-col": "2"
+          },
+          "content": [
+            {
+              "block": "payment"
+            }
+          ]
+        },
+        {
+          "block": "grid",
+          "elem": "fraction",
+          "elemMods": {
+            "m-col": "8"
+          },
+          "content": [
+            {
+              "block": "offer"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
