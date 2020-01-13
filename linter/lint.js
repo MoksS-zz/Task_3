@@ -337,8 +337,7 @@ class Warning {
 
   static check(result, obj, rule, path) {
     if (obj.block === "text") {
-      if (!obj.mods) return;
-      if (!obj.mods.size) return;
+      if (!obj.mods || !obj.mods.size) return;
       if (rule.text.mods.size === "none") {
         const sizeButton = size[size.indexOf(obj.mods.size) + 1];
         rule.text.mods.size = obj.mods.size;
@@ -418,8 +417,7 @@ class Header {
   }
 
   static check(result, obj, rule, path) {
-    if (obj.block !== "text" || !obj.mods) return;
-    if (!obj.mods.type) return;
+    if (obj.block !== "text" || !obj.mods || !obj.mods.type) return;
     switch (obj.mods.type) {
       case "h1":
         if (rule.h1.available) {
