@@ -11,7 +11,7 @@ import {
 
 import { basename } from 'path';
 
-import { ExampleConfiguration} from './configuration';
+import { ExampleConfiguration } from './configuration';
 import { lint } from '../linter/lint';
 
 let conn = createConnection(ProposedFeatures.all);
@@ -27,6 +27,41 @@ conn.onInitialize((params: InitializeParams) => {
   };
 });
 
+function GetSeverity(key: string): DiagnosticSeverity | undefined {
+  if (!conf || !conf.severity) {
+      return undefined;
+  }
+
+  const severity: string = conf.severity[key].typeError;
+
+  switch (severity) {
+      case "Error":
+          return DiagnosticSeverity.Error;
+      case "Warning":
+          return DiagnosticSeverity.Warning;
+      case "Information":
+          return DiagnosticSeverity.Information;
+      case "Hint":
+          return DiagnosticSeverity.Hint;
+      default:
+          return undefined;
+  }
+}
+
+function GetMessage(key: string): string {
+  if (!conf || !conf.severity) {
+    return `Unknown problem type '${key}'`;
+  }
+
+  const description: string = conf.severity[key].description;
+
+  if (!description) {
+    return `Unknown problem type '${key}'`;
+  }
+
+  return description;
+}
+
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
   const source = basename(textDocument.uri);
   const json = textDocument.getText();
@@ -36,21 +71,25 @@ async function validateTextDocument(textDocument: TextDocument): Promise<void> {
       list: Diagnostic[],
       problem
     ): Diagnostic[] => {
+      const severity = GetSeverity(problem.key);
 
-      let diagnostic: Diagnostic = {
-        range: {
-          start: textDocument.positionAt(
-            problem.loc.start.offset
-          ),
-          end: textDocument.positionAt(problem.loc.end.offset)
-        },
-        severity: DiagnosticSeverity.Error,
-        message: problem.error,
-        source
-      };
+      if (severity) {
+        const message = GetMessage(problem.key);
 
-      list.push(diagnostic);
-
+        const diagnostic: Diagnostic = {
+          range: {
+            start: textDocument.positionAt(
+              problem.loc.start.offset
+            ),
+            end: textDocument.positionAt(problem.loc.end.offset)
+          },
+          severity,
+          message,
+          source
+        };
+  
+        list.push(diagnostic);
+      }
 
       return list;
     },

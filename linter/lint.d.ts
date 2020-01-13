@@ -9,47 +9,13 @@ declare namespace JsonToAst {
       start: AstPosition;
       end: AstPosition;
   }
-
-  export interface AstLiteral {
-      type: 'Literal';
-      value: string | number | boolean | null;
-      raw: string;
-      loc: AstLocation;
-  }
-
-  export interface AstArray {
-      type: 'Array';
-      children: Array<AstJsonEntity>;
-      loc: AstLocation;
-  }
-
-  export interface AstObject {
-      type: 'Object';
-      children: AstProperty[];
-      loc: AstLocation;
-  }
-
-  export interface AstProperty {
-      type: 'Property';
-      key: AstIdentifier;
-      value: AstJsonEntity;
-      loc: AstLocation;
-  }
-
-  export interface AstIdentifier {
-      type: 'Identifier';
-      value: string;
-      raw: string;
-  }
-
-  export type AstJsonEntity = AstObject | AstArray | AstLiteral;
 }
 
-export interface LinterProblem<TKey> {
-  key: TKey;
+export interface LinterProblem {
+  key: string;
   error: string;
   loc: JsonToAst.AstLocation;
 }
 
-export declare function lint <TProblemKey>(str: string): LinterProblem<TProblemKey>[];
+export declare function lint (str: string): LinterProblem[];
 export declare function parse (str: string): Object;

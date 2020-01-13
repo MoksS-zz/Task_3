@@ -310,13 +310,13 @@ const error = (result, obj, path) => {
 class Warning {
   constructor(obj) {
     this.text = {
-      code: "WARNING.TEXT_SIZES_SHOULD_BE_EQUAL",
+      code: "WARNING_TEXT_SIZES_SHOULD_BE_EQUAL",
       mods: { size: obj.size || "none" },
       error: "Тексты в блоке warning должны быть одного размера"
     };
 
     this.button = {
-      code: "WARNING.INVALID_BUTTON_SIZE",
+      code: "WARNING_INVALID_BUTTON_SIZE",
       error: "Размер кнопки блока warning должен быть на 1 шаг больше текста",
       mods: { size: obj.size || "none" },
       pathText: [],
@@ -324,13 +324,13 @@ class Warning {
     };
 
     this.placeholder = {
-      code: "WARNING.INVALID_PLACEHOLDER_SIZE",
+      code: "WARNING_INVALID_PLACEHOLDER_SIZE",
       error: "Недопустимые размеры для блока placeholder",
       mods: { size: ["s", "m", "l"] }
     };
 
     this.sequence = {
-      code: "WARNING.INVALID_BUTTON_POSITION",
+      code: "WARNING_INVALID_BUTTON_POSITION",
       error: "Блок button не может находиться перед блоком placeholder"
     };
   }
@@ -398,19 +398,19 @@ class Warning {
 class Header {
   constructor() {
     this.h1 = {
-      code: "TEXT.SEVERAL_H1",
+      code: "TEXT_SEVERAL_H1",
       error: "Заголовок h1 на странице должен быть единственным",
       available: false
     };
 
     this.h2 = {
-      code: "TEXT.INVALID_H2_POSITION",
+      code: "TEXT_INVALID_H2_POSITION",
       error: "Заголовок h2  не может находиться перед заголовком h1",
       path: []
     };
 
     this.h3 = {
-      code: "TEXT.INVALID_H3_POSITION",
+      code: "TEXT_INVALID_H3_POSITION",
       error: "Заголовок h3 не может находиться перед заголовком h2",
       path: []
     };
@@ -453,7 +453,7 @@ class Header {
 
 class Grid {
   constructor(obj) {
-    this.code = "GRID.TOO_MUCH_MARKETING_BLOCKS";
+    this.code = "GRID_TOO_MUCH_MARKETING_BLOCKS";
     this.error = "маркетинговые блоки занимают больше половины блока grid";
     this.count = 0;
     this.total = obj.total;

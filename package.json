@@ -24,7 +24,7 @@
 					"default": true,
 					"description": "Enable/disable example linter."
 				},
-				"example.severity.uppercaseNamesIsForbidden": {
+				"example.severity.WARNING_TEXT_SIZES_SHOULD_BE_EQUAL": {
 					"type": "string",
 					"enum": [
 						"Error",
@@ -33,10 +33,12 @@
 						"Hint",
 						"None"
 					],
-					"default": "Warning",
-					"description": "The 'uppercaseNamesIsForbidden' rule severity."
+					"default": {
+            "typeError" : "Error",
+            "description": "Тексты в блоке warning должны быть одного размера"
+          }
 				},
-				"example.severity.blockNameIsRequired": {
+				"example.severity.WARNING_INVALID_BUTTON_SIZE": {
 					"type": "string",
 					"enum": [
 						"Error",
@@ -45,8 +47,94 @@
 						"Hint",
 						"None"
 					],
-					"default": "Warning",
-					"description": "The 'blockNameIsRequired' rule severity."
+					"default": {
+            "typeError" : "Error",
+            "description": "Тексты в блоке warning должны быть одного размера"
+          }
+        },
+        "example.severity.WARNING_INVALID_PLACEHOLDER_SIZE": {
+					"type": "string",
+					"enum": [
+						"Error",
+						"Warning",
+						"Information",
+						"Hint",
+						"None"
+					],
+					"default": {
+            "typeError" : "Error",
+            "description": "Недопустимые размеры для блока placeholder"
+          }
+        },
+        "example.severity.WARNING_INVALID_BUTTON_POSITION": {
+					"type": "string",
+					"enum": [
+						"Error",
+						"Warning",
+						"Information",
+						"Hint",
+						"None"
+					],
+					"default": {
+            "typeError" : "Error",
+            "description": "Блок button не может находиться перед блоком placeholder"
+          }
+        },
+        "example.severity.TEXT_SEVERAL_H1": {
+					"type": "string",
+					"enum": [
+						"Error",
+						"Warning",
+						"Information",
+						"Hint",
+						"None"
+					],
+					"default": {
+            "typeError" : "Error",
+            "description": "Заголовок h1 на странице должен быть единственным"
+          }
+        },
+        "example.severity.TEXT_INVALID_H2_POSITION": {
+					"type": "string",
+					"enum": [
+						"Error",
+						"Warning",
+						"Information",
+						"Hint",
+						"None"
+					],
+					"default": {
+            "typeError" : "Error",
+            "description": "Заголовок h2  не может находиться перед заголовком h1"
+          }
+        },
+        "example.severity.TEXT_INVALID_H3_POSITION": {
+					"type": "string",
+					"enum": [
+						"Error",
+						"Warning",
+						"Information",
+						"Hint",
+						"None"
+					],
+					"default": {
+            "typeError" : "Error",
+            "description": "Заголовок h3 не может находиться перед заголовком h2"
+          }
+        },
+        "example.severity.GRID_TOO_MUCH_MARKETING_BLOCKS": {
+					"type": "string",
+					"enum": [
+						"Error",
+						"Warning",
+						"Information",
+						"Hint",
+						"None"
+					],
+					"default": {
+            "typeError" : "Error",
+            "description": "маркетинговые блоки занимают больше половины блока grid"
+          }
 				}
 			}
 		},

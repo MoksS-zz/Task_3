@@ -3,22 +3,17 @@ export enum RuleKeys {
     BlockNameIsRequired = 'blockNameIsRequired'
 }
 
-export enum Severity {
-    Error = "Error", 
-    Warning = "Warning", 
-    Information = "Information", 
-    Hint = "Hint", 
-    None = "None"
+export interface Severity {
+    typeError: string;
+    description: string;
 }
 
 export interface SeverityConfiguration {
-    [RuleKeys.BlockNameIsRequired]: Severity;
-    [RuleKeys.UppercaseNamesIsForbidden]: Severity;
+   [propName:string]: Severity;
 }
 
-export interface ExampleConfiguration {
- 
+export interface ExampleConfiguration{
+
     enable: boolean;
- 
     severity: SeverityConfiguration;
 }
